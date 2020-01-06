@@ -1,0 +1,9 @@
+<div class="form-group">
+<label>Contact Preference</label>
+<div class="form-control">
+<label class="radio-inline">
+<input type="radio" name="contactPreference" value="email">Email: </label>
+<label class="radio-inline">
+<input type="radio" name="contactPreference" value="phone">Phone: </label>
+</div>
+</div>
