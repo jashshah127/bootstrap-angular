@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl , FormBuilder , Validators } from '@angular/forms';
 
 
 @Component({
@@ -14,17 +14,17 @@ export class CreateEmployeeComponent implements OnInit {
 
   ngOnInit() {
     this.employeeForm = new FormGroup({
-      fullName: new FormControl(),
+      firstName: new FormControl(),
+      lastName: new FormControl(),
       userName: new FormControl(),
       passWord: new FormControl(),
       gender: new FormControl(),
       email: new FormControl(),
-      phone: new FormControl()
+      phone: new FormControl(),
+      address: new FormControl(),
+      hobbies: new FormControl(),
+      age: new FormControl()
 
     });
-  }
-
-  onSubmit(): void{
-    console.log(this.employeeForm.value);
   }
 }
