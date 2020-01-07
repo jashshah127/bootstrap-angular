@@ -1,0 +1,171 @@
+import { Component, OnInit } from '@angular/core';
+import { NgForm, FormGroup, Validator, FormBuilder, Validators } from '@angular/forms';
+import { CommonServiceService } from '../Services/common-service.serive';
+import { from } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { PathLocationStrategy } from '@angular/common';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-create-employee',
+  templateUrl: './create-employee.component.html',
+  styleUrls: ['./create-employee.component.css']
+})
+export class CreateEmployeeComponent implements OnInit {
+  employeeForm: FormGroup;
+  error = '';
+  apiStatus = 0;
+  FormAction = 'Create';
+  userId;
+  // tslint:disable-next-line: max-line-length
+  constructor(private fb: FormBuilder, private commonServie: CommonServiceService, private routes: ActivatedRoute, private router: Router) { }
+  ngOnInit() {
+
+    this.employeeForm = this.fb.group({
+      userid: [''],
+      username: [''],
+      password: [''],
+      firstname: [''],
+      lastname: [''],
+      gender: [''],
+      age: [''],
+      address: [''],
+      phone: [''],
+      emailid: [''],
+      swimming: [false],
+      reading: [false],
+      outdoorsports: [false],
+      indoorsports: [false],
+      other: [false],
+      hobbies: [],
+      isActive: true
+    });
+    //this.userId = this.routes.snapshot.params.id;
+    if (this.userId) {
+      this.FormAction = 'Update';
+      this.commonServie.getemployeeByID(this.userId).subscribe(res => {
+        this.employeeForm.controls.userid.setValue(this.userId);
+        this.employeeForm.controls.password.setValue(res.password);
+        this.employeeForm.controls.firstname.setValue(res.firstname);
+        this.employeeForm.controls.lastname.setValue(res.lastname);
+        this.employeeForm.controls.gender.setValue(res.gender);
+        this.employeeForm.controls.age.setValue(res.age);
+        this.employeeForm.controls.address.setValue(res.address);
+        this.employeeForm.controls.phone.setValue(res.phone);
+        this.employeeForm.controls.emailid.setValue(res.emailid);
+        this.employeeForm.controls.hobbies.setValue(res.hobbies);
+
+        if (res.hobbies.indexOf('reading') >= 0){
+          this.employeeForm.controls.reading.setValue(true);
+        }
+
+        if (res.hobbies.indexOf('swimming') >= 0) {
+          this.employeeForm.controls.swimming.setValue(true);
+        }
+        
+        if (res.hobbies.indexOf('outdoorsports') >= 0){
+          this.employeeForm.controls.outdoorsports.setValue(true);
+        }
+        if (res.hobbies.indexOf('indoorsports') >= 0){
+          this.employeeForm.controls.indoorsports.setValue(true);
+        }
+        if (res.hobbies.indexOf('other') >= 0){
+          this.employeeForm.controls.other.setValue(true);
+        }
+      });
+    }
+  }
+  onRegister() {
+
+    let hobbies = '';
+    if (this.employeeForm.value.swimming) {
+      hobbies = 'swimming,' + hobbies;
+    }
+    if (this.employeeForm.value.reading) {
+      hobbies = 'reading,' + hobbies;
+    }
+    if (this.employeeForm.value.outdoorsports) {
+      hobbies = 'outdoorsports,' + hobbies;
+    }
+    if (this.employeeForm.value.indoorsports) {
+      hobbies = 'indoorsports,' + hobbies;
+    }
+    if (this.employeeForm.value.other) {
+      hobbies = 'other,' + hobbies;
+    }
+
+    if (hobbies !== '') {
+      const lastChar = hobbies.slice(-1);
+      if (lastChar === ',') {
+        hobbies = hobbies.slice(0, -1);
+      }
+    }
+
+    this.employeeForm.controls.hobbies.setValue(hobbies);
+
+    const formdata = this.employeeForm.value;
+    if (!this.userId) {
+      if (formdata.username == '') {
+        this.error = 'Please enter username!(It must be unique)';
+        return false;
+      }
+      if (formdata.password == '' || formdata.password.length < 8) {
+        this.error = 'Please select a password!(not less than 8 characters)';
+        return false;
+      }
+    }
+    if (formdata.firstname === '') {
+      this.error = 'Please enter first name!';
+      return false;
+    }
+    if (formdata.lastname === '') {
+      this.error = 'Please enter last name!';
+      return false;
+    }
+    if (formdata.gender === '') {
+      this.error = 'Please specify gender!';
+      return false;
+    }
+    if (formdata.age == '' || formdata.age < 18) {
+      this.error = 'Specify your age!(must be above 18)';
+      return false;
+    }
+    if (formdata.address == '') {
+      this.error = 'Please enter your address!';
+      return false;
+    }
+    if (formdata.phone == '' || formdata.phone.length < 10) {
+      this.error = 'Please enter a valid phone number!';
+      return false;
+    }
+    if (formdata.emailid == '') {
+      this.error = 'Please enter your emailid!';
+      return false;
+    }
+
+    if (formdata.hobbies == '') {
+      this.error = 'Hobbies cannot be kept blank!';
+      return false;
+    }
+    this.error = '';
+
+    // tslint:disable-next-line: align
+    if (this.userId) {
+      this.commonServie.PostUserUpdate(this.employeeForm.value).subscribe(res => {
+        this.error = res.value.message;
+        this.apiStatus = res.value.status;
+        if (this.apiStatus === 1) {
+          this.router.navigate(['/list/']);
+        }
+      });
+    } else {
+      this.commonServie.register(formdata).subscribe(res => {
+        this.error = res.message;
+        this.apiStatus = res.value.status;
+        if (this.apiStatus === 1) {
+          this.router.navigate(['/list/']);
+        }
+      });
+    }
+  }
+}
