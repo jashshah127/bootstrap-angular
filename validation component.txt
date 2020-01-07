@@ -1,0 +1,34 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl , FormBuilder , Validators } from '@angular/forms';
+
+
+@Component({
+  selector: 'app-create-employee',
+  templateUrl: './create-employee.component.html',
+  styleUrls: ['./create-employee.component.css']
+})
+export class CreateEmployeeComponent implements OnInit {
+
+  employeeForm: FormGroup;
+  constructor(private fb : FormBuilder) { }
+
+  ngOnInit() {
+    this.employeeForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      userName: ['', Validators.required],
+      passWord: ['', Validators.required],
+      gender: ['', Validators.required],
+      email: ['', Validators.required],
+      phone: ['', Validators.required],
+      address: ['', Validators.required],
+      hobbies: ['', Validators.required],
+      age: ['', Validators.required]
+
+    });
+  }
+
+  onSubmit(){debugger;
+    console.log(this.employeeForm);
+  }
+}

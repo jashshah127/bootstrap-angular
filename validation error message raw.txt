@@ -1,0 +1,12 @@
+<div class="form-group" [ngClass]="{'has-error' : employeeForm.get('firstName').errors 
+             && (employeeForm.get('firstName').touched || employeeForm.get('firstName').dirty)}">
+                <label class="col-sm-2 control-label" for="firstName">First Name: </label>
+                <div class="col-sm-8">
+                    <input id="firstName" formControlName="firstName" type="text" maxlength="30" class="form-control">
+                <span class="help-block" *ngIf=" employeeForm.get('firstName').errors 
+                 && (employeeForm.get('firstName').touched || employeeForm.get('firstName').dirty)">
+                    <span *ngIf="employeeForm.get('firstName').errors.required">
+                    First Name is Mandatory.*
+                 </span>
+                </span>
+                </div>

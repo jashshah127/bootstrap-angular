@@ -1,0 +1,2 @@
+ <div class="form-group" [ngClass]="{'has-error' : employeeForm.get('firstName').errors 
+             && (employeeForm.get('firstName').touched || employeeForm.get('firstName').dirty)}">
