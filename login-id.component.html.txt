@@ -1,0 +1,81 @@
+<!--<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Registered Employees Login in with your designated Username and Password</h3>
+        </div>
+       
+<div>
+    <head>
+        <title>Log-In Now!</title>
+    </head>
+    
+    <body>
+        <form [formGroup]="employeeForm">
+        <div class="container">
+            <label class="control-label col-sm-2" for="username">User Name:</label>
+            <div class="col-sm-10">
+                <input type="username" formControlName="username" class="form-control bgap" id="username">
+            </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="password">Password:</label>
+                <div class="col-sm-10">
+                    <input type="password" formControlName="password" class="form-control bgap" id="password">
+                </div>
+            </div>
+            <div>
+                <label>{{error}}</label>
+            </div>
+        
+            <div class="form-group">
+                <div class="col-md-offset-6 col-md-6">
+                    <button type="submit" class="btn btn-info" (click)="login()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        </form>
+    </form>
+</form>
+        </body> -->
+
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title">Registered Employees Login in with your designated Username and Password</h2>
+        </div>
+    </div>
+    <div class="panel-body"></div>
+            <body>
+                
+                <form [formGroup]="employeeForm">
+                    <div class="container">
+                        <label class="control-label col-sm-2" for="username">User Name:</label>
+                        <div class="col-sm-10">
+
+                            <input id="userName" formControlName="userName" type="text" maxlength="20"
+                                class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-1" for="password">Password:</label>
+                            <div class="col-sm-10">
+                                <input id="password" formControlName="passWord" type="passWord" maxlength="14"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div>
+                            <label>{{error}}</label>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-6 col-md-6">
+                                <button type="submit" class="btn btn-info" (click)="login()">Submit</button>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </body>
