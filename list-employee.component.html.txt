@@ -1,0 +1,144 @@
+<p>Here is the list of existing employees:</p>
+<div class="container">
+    
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Main List</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Hobbies</th>
+        <th>isActive</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let employee of employees">
+            <td><b>{{employee.firstName}}</b></td>
+            <td><b>{{employee.lastName}}</b></td>
+            <td><b>{{employee.gender}}</b></td>
+            <td><b>{{employee.age}}</b></td>
+            <td><b>{{employee.address}}</b></td>
+            <td><b>{{employee.phone}}</b></td>
+            <td><b>{{employee.email}}</b></td>
+            <td><b>{{employee.hobbies}}</b></td>
+            <td><b>{{employee.isActive}}</b></td>
+            <td><button input type="button" class="btn-success" [routerLink]="['/create/' + employees.userid]" routerLinkActive="router-link-active" >Update</button></td>
+            <td><button input type="button" class="btn-info" (click)="deleteEmp(employee.userid)">Delete</button></td>
+        </tr>
+        <tr><button input type="button" class="btn-info" (click)="show()">Show All Employees</button></tr>
+        <tr><button input type="button" class="btn-info" (click)="tremove()" [routerLink]="['/login/']" routerLinkActive="router-link-active" >Logout</button></tr>
+    </tbody>
+    </table>
+</div>
+<!-- <div class="panel panel-primary" *ngFor="let loyee of employees">
+    <div class="panel-heading">
+        <h3 class="panel-title"><b><b>{{employee.firstname}}</h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-xs-8">
+                <div class="col-xs-8">
+
+                    <div class="row">
+                        <div class="col-xs-6">
+                            First Name
+
+                        </div>
+                        <div class="col-xs-6">
+                            :{{employee.firstname}}
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Last Name
+
+                        </div>
+                        <div class="col-xs-6">
+                            :{{employee.lastname}}
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Gender
+
+                        </div>
+                        <div class="col-xs-6">
+                            :{{employee.gender}}
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Age
+
+                        </div>
+                        <div class="col-xs-6">
+                            :{{employee.age}}
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Address
+
+                        </div>
+                        <div class="col-xs-6">
+                            :{{employee.address}}
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Phone
+
+                        </div>
+                        <div class="col-xs-6">
+                            :{{employee.phone}}
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Email ID
+
+                        </div>
+                        <div class="col-xs-6">
+                            :{{employee.emailid}}
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            isActive
+
+                        </div>
+                        <div class="col-xs-6">
+                            :{{employee.isActive}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button type="button" class="btn btn-primary" [routerLink]="['/create/' + employee.userid]" routerLinkActive="router-link-active">Update</button>
+
+                            <button type="button" class="btn btn-primary gap" (click)="deleteEmp(employee.userid)">Delete</button>
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<div class="panel-footer">
+    <div class="btn-toolbar">
+        <button type="button" class="btn btn-primary" (click)="show()">Show All Employees</button>
+        </div>
+        </div> -->
+    <--- Compiled by Jash Bhavesh Shah --->
